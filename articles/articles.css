@@ -239,14 +239,16 @@ nav a.active {
 
 /* Category Filter */
 .category-filter {
-  display: flex;
+  display: flex !important;
+  flex-direction: row !important;
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
 }
 
 .filter-btn {
-  display: flex;
+  display: flex !important;
+  flex-direction: row !important;
   align-items: center;
   gap: 0.5rem;
   background: rgba(255, 255, 255, 0.1);
@@ -1704,9 +1706,12 @@ footer {
   }
   
   .category-filter {
+    display: flex !important;
+    flex-direction: row !important;
     justify-content: flex-start;
     overflow-x: auto;
     padding-bottom: 0.5rem;
+    flex-wrap: nowrap;
   }
   
   .filter-btn {
