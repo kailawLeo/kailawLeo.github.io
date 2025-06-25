@@ -1,0 +1,213 @@
+---
+layout: default
+title: 法律文章
+body_class: articles-page
+custom_css:
+  - /articles/articles.css
+custom_js:
+  - /articles/articles.js
+---
+
+<!-- Articles Hero Section -->
+<section class="articles-hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>法律知識分享</h1>
+            <p>專業法律見解，為您提供實用的法律知識與案例分析</p>
+        </div>
+    </div>
+</section>
+
+<!-- Search and Filter Section -->
+<section class="articles-filter">
+    <div class="container">
+        <div class="filter-content">
+            <!-- Search Bar -->
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="ph ph-magnifying-glass"></i>
+                    <input type="text" id="searchInput" placeholder="搜尋文章標題、內容或標籤..." aria-label="搜尋文章">
+                    <button class="search-clear" id="searchClear" aria-label="清除搜尋">
+                        <i class="ph ph-x"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Category Filter -->
+            <div class="category-filter">
+                <button class="filter-btn active" data-category="all">
+                    <i class="ph ph-list"></i>
+                    全部文章
+                </button>
+                {% for category in site.article_categories %}
+                <button class="filter-btn" data-category="{{ category.slug }}">
+                    <i class="{{ category.icon }}"></i>
+                    {{ category.name }}
+                </button>
+                {% endfor %}
+            </div>
+            
+            <!-- Sort Options -->
+            <div class="sort-options">
+                <label for="sortSelect">排序方式：</label>
+                <select id="sortSelect">
+                    <option value="date-desc">最新發布</option>
+                    <option value="date-asc">最早發布</option>
+                    <option value="title-asc">標題 A-Z</option>
+                    <option value="title-desc">標題 Z-A</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Active Filters Display -->
+        <div class="active-filters" id="activeFilters" style="display: none;">
+            <span class="filters-label">篩選條件：</span>
+            <div class="filters-list" id="filtersList"></div>
+            <button class="clear-all-filters" id="clearAllFilters">清除全部</button>
+        </div>
+        
+        <!-- Results Count -->
+        <div class="results-info">
+            <span id="resultsCount">{{ site.posts.size }}</span> 篇文章
+        </div>
+    </div>
+</section>
+
+<!-- Featured Articles -->
+{% assign featured_posts = site.posts | where: "featured", true | limit: 3 %}
+{% if featured_posts.size > 0 %}
+<section class="featured-articles">
+    <div class="container">
+        <h2 class="section-title">精選文章</h2>
+        <div class="featured-grid">
+            {% for post in featured_posts %}
+                <article class="featured-card">
+                    <div class="featured-image">
+                        {% if post.featured_image %}
+                            <img src="{{ post.featured_image | relative_url }}" alt="{{ post.title }}" loading="lazy">
+                        {% else %}
+                            <div class="placeholder-image">
+                                {% assign category_data = site.article_categories | where: "name", post.category | first %}
+                                {% if category_data %}
+                                    <i class="{{ category_data.icon }}"></i>
+                                {% else %}
+                                    <i class="ph ph-article"></i>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                        <div class="featured-overlay">
+                            <span class="featured-badge">精選</span>
+                        </div>
+                    </div>
+                    <div class="featured-content">
+                        <div class="featured-meta">
+                            {% if post.category %}
+                                <span class="featured-category">{{ post.category }}</span>
+                            {% endif %}
+                            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+                        </div>
+                        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+                        {% if post.excerpt %}
+                            <p>{{ post.excerpt | strip_html | truncate: 150 }}</p>
+                        {% endif %}
+                        <a href="{{ post.url | relative_url }}" class="featured-link">閱讀全文 <i class="ph ph-arrow-right"></i></a>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Articles Grid -->
+<section class="articles-section">
+    <div class="container">
+        <div class="articles-container">
+            <!-- Articles Grid -->
+            <div class="articles-grid" id="articlesGrid">
+                {% for post in site.posts %}
+                    {% unless post.featured %}
+                        {% include article-card.html post=post %}
+                    {% endunless %}
+                {% endfor %}
+            </div>
+            
+            <!-- No Results Message -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <div class="no-results-content">
+                    <i class="ph ph-magnifying-glass"></i>
+                    <h3>找不到符合條件的文章</h3>
+                    <p>嘗試調整搜尋條件或瀏覽其他分類</p>
+                    <button class="clear-filters-btn" onclick="clearAllFilters()">清除所有篩選</button>
+                </div>
+            </div>
+            
+            <!-- Loading Animation -->
+            <div class="loading-animation" id="loadingAnimation" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>載入中...</p>
+            </div>
+        </div>
+        
+        <!-- Load More Button -->
+        <div class="load-more-container" id="loadMoreContainer">
+            <button class="load-more-btn" id="loadMoreBtn">
+                載入更多文章
+                <i class="ph ph-arrow-down"></i>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Categories Overview -->
+<section class="categories-overview">
+    <div class="container">
+        <h2 class="section-title">專業領域</h2>
+        <p class="section-subtitle">深度解析各類法律議題，提供專業見解與實務經驗分享</p>
+        <div class="categories-grid">
+            {% for category in site.article_categories %}
+                {% assign category_posts = site.posts | where: "category", category.name %}
+                <div class="category-card" data-category="{{ category.slug }}">
+                    <div class="category-icon">
+                        <i class="{{ category.icon }}"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3>{{ category.name }}</h3>
+                        <p>{{ category.description }}</p>
+                        <div class="category-stats">
+                            <span class="post-count">{{ category_posts.size }} 篇文章</span>
+                            {% if category_posts.size > 0 %}
+                                <span class="latest-post">最新：{{ category_posts.first.date | date: "%m/%d" }}</span>
+                            {% endif %}
+                        </div>
+                        <button class="category-btn" onclick="filterByCategory('{{ category.slug }}')">
+                            查看文章 <i class="ph ph-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Subscription -->
+<section class="newsletter-section">
+    <div class="container">
+        <div class="newsletter-content">
+            <div class="newsletter-text">
+                <h2>訂閱法律知識電子報</h2>
+                <p>定期收到最新的法律文章與重要法規更新通知</p>
+            </div>
+            <form class="newsletter-form" id="newsletterForm">
+                <div class="form-group">
+                    <input type="email" placeholder="請輸入您的電子郵件" required>
+                    <button type="submit">
+                        <i class="ph ph-paper-plane-tilt"></i>
+                        訂閱
+                    </button>
+                </div>
+                <p class="privacy-notice">我們尊重您的隱私，不會將您的資料提供給第三方</p>
+            </form>
+        </div>
+    </div>
+</section>

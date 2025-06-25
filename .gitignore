@@ -1,4 +1,5 @@
-assets/ignore
-assets/ignore/heroPic.afphoto
+assets/ignore/
 assets/.DS_Store
 assets/images/.DS_Store
+CLAUDE.md
+.claude/

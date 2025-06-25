@@ -1,0 +1,78 @@
+<article class="article-card" data-category="{{ include.post.category }}" data-date="{{ include.post.date | date: '%Y-%m-%d' }}">
+    <div class="card-header">
+        {% if include.post.featured_image %}
+            <div class="card-image">
+                <img src="{{ include.post.featured_image | relative_url }}" alt="{{ include.post.title }}" loading="lazy">
+                <div class="image-overlay"></div>
+            </div>
+        {% else %}
+            <div class="card-image placeholder">
+                <div class="placeholder-content">
+                    {% assign category_data = site.article_categories | where: "name", include.post.category | first %}
+                    {% if category_data %}
+                        <i class="{{ category_data.icon }}"></i>
+                    {% else %}
+                        <i class="ph ph-article"></i>
+                    {% endif %}
+                </div>
+                <div class="image-overlay"></div>
+            </div>
+        {% endif %}
+        
+        <div class="card-meta">
+            {% if include.post.category %}
+                <span class="card-category" data-category="{{ include.post.category }}">
+                    {% assign category_data = site.article_categories | where: "name", include.post.category | first %}
+                    {% if category_data %}
+                        <i class="{{ category_data.icon }}"></i>
+                    {% endif %}
+                    {{ include.post.category }}
+                </span>
+            {% endif %}
+            <time class="card-date" datetime="{{ include.post.date | date_to_xmlschema }}">
+                {{ include.post.date | date: "%Y-%m-%d" }}
+            </time>
+        </div>
+    </div>
+    
+    <div class="card-content">
+        <h3 class="card-title">
+            <a href="{{ include.post.url | relative_url }}">{{ include.post.title }}</a>
+        </h3>
+        
+        {% if include.post.excerpt %}
+            <p class="card-excerpt">{{ include.post.excerpt | strip_html | truncate: 120 }}</p>
+        {% endif %}
+        
+        <div class="card-footer">
+            <div class="card-author">
+                <div class="author-avatar">張</div>
+                <div class="author-info">
+                    <span class="author-name">{{ include.post.author | default: site.author.name }}</span>
+                    <span class="read-time">
+                        <i class="ph ph-clock"></i>
+                        {{ include.post.content | number_of_words | divided_by: 200 | plus: 1 }} 分鐘閱讀
+                    </span>
+                </div>
+            </div>
+            
+            <div class="card-actions">
+                {% if include.post.tags and include.post.tags.size > 0 %}
+                    <div class="card-tags">
+                        {% for tag in include.post.tags limit:2 %}
+                            <span class="tag">{{ tag }}</span>
+                        {% endfor %}
+                        {% if include.post.tags.size > 2 %}
+                            <span class="tag-more">+{{ include.post.tags.size | minus: 2 }}</span>
+                        {% endif %}
+                    </div>
+                {% endif %}
+                
+                <a href="{{ include.post.url | relative_url }}" class="read-more-btn">
+                    閱讀更多
+                    <i class="ph ph-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</article>

@@ -1,0 +1,82 @@
+# Site settings
+title: 智凱律師事務所
+email: hi@kailaw.tw
+description: >-
+  專業、誠信、效率，為您提供最優質的法律諮詢與服務。
+  張智凱律師擁有豐富的實戰經驗，無論多複雜的案件都能為您找到最合適的解決方案。
+baseurl: ""
+url: "https://kailaw.tw"
+
+# Author
+author:
+  name: 張智凱律師
+  email: hi@kailaw.tw
+  phone: 0928093279
+  address: 台北市中山區南京東路二段71號7樓之2
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /articles/:year/:month/:day/:title/
+paginate: 6
+paginate_path: "/articles/page:num/"
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /articles/:year/:month/:day/:title/
+
+# Plugins
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Default values
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "張智凱律師"
+      show_excerpts: true
+
+# Article categories
+article_categories:
+  - name: "企業法務"
+    slug: "corporate-law"
+    description: "公司設立、股權規劃、合約審查等企業法律事務"
+    icon: "ph-buildings"
+  - name: "民商事訴訟" 
+    slug: "civil-litigation"
+    description: "債權債務、契約糾紛、侵權行為等民商事案件"
+    icon: "ph-scales"
+  - name: "不動產法務"
+    slug: "real-estate"
+    description: "不動產買賣、租賃、繼承、都更等相關法律事務"
+    icon: "ph-house"
+  - name: "家事法務"
+    slug: "family-law"
+    description: "婚姻關係、子女監護、遺產繼承等家庭法律問題"
+    icon: "ph-users-three"
+  - name: "智慧財產權"
+    slug: "intellectual-property"
+    description: "商標、專利、著作權等智慧財產權保護"
+    icon: "ph-copyright"
+  - name: "勞動法務"
+    slug: "labor-law"
+    description: "勞資爭議、勞動契約、職場糾紛等勞動法律問題"
+    icon: "ph-handshake"
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
