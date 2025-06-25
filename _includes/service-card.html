@@ -1,0 +1,237 @@
+<!-- 服務卡片組件 -->
+{% assign service = include.service %}
+
+<div class="service-card {% if service.featured %}service-card--featured{% endif %}" data-service="{{ service.slug }}">
+  <div class="service-card__header">
+    {% if service.icon %}
+      <div class="service-card__icon">
+        <i class="{{ service.icon }}"></i>
+      </div>
+    {% endif %}
+    
+    {% if service.featured %}
+      <div class="service-card__badge">
+        <span class="badge badge--primary">熱門服務</span>
+      </div>
+    {% endif %}
+  </div>
+  
+  <div class="service-card__content">
+    <h3 class="service-card__title">{{ service.name }}</h3>
+    
+    {% if service.description %}
+      <p class="service-card__description">{{ service.description }}</p>
+    {% endif %}
+    
+    {% if service.features %}
+      <ul class="service-card__features">
+        {% for feature in service.features limit:3 %}
+          <li>{{ feature }}</li>
+        {% endfor %}
+        {% if service.features.size > 3 %}
+          <li class="service-card__more">還有 {{ service.features.size | minus: 3 }} 項服務...</li>
+        {% endif %}
+      </ul>
+    {% endif %}
+    
+    {% if service.price_range %}
+      <div class="service-card__price">
+        <span class="price-label">諮詢費用：</span>
+        <span class="price-value">{{ service.price_range }}</span>
+      </div>
+    {% endif %}
+  </div>
+  
+  <div class="service-card__footer">
+    {% if service.case_count %}
+      <div class="service-card__stats">
+        <span class="stat-item">
+          <i class="ph ph-briefcase"></i>
+          {{ service.case_count }}+ 案例
+        </span>
+      </div>
+    {% endif %}
+    
+    <div class="service-card__actions">
+      {% if include.show_details_link %}
+        <a href="{{ service.url | default: '#' }}" class="btn btn--secondary btn--small">
+          了解更多
+        </a>
+      {% endif %}
+      
+      <a href="{{ '/contact.html' | relative_url }}?service={{ service.slug }}" class="btn btn--primary btn--small">
+        立即諮詢
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+.service-card {
+  @include card;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  height: 100%;
+  position: relative;
+  
+  &--featured {
+    border: 2px solid var(--primary-color);
+    background: rgba(215, 183, 101, 0.05);
+    
+    &:hover {
+      border-color: var(--primary-hover);
+      box-shadow: 0 20px 40px var(--primary-shadow);
+    }
+  }
+}
+
+.service-card__header {
+  position: relative;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.service-card__icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  color: var(--bg-dark);
+  font-size: 2rem;
+  transition: var(--transition);
+}
+
+.service-card:hover .service-card__icon {
+  transform: scale(1.1);
+  box-shadow: 0 10px 30px var(--primary-shadow);
+}
+
+.service-card__badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+}
+
+.service-card__content {
+  flex: 1;
+  margin-bottom: 1.5rem;
+}
+
+.service-card__title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--white);
+}
+
+.service-card__description {
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.service-card__features {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.service-card__features li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.service-card__features li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.service-card__features .service-card__more {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.service-card__features .service-card__more::before {
+  content: '⋯';
+  color: var(--text-muted);
+}
+
+.service-card__price {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.8rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.price-label {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.price-value {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.service-card__footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1rem;
+}
+
+.service-card__stats {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.stat-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.stat-item i {
+  color: var(--primary-color);
+}
+
+.service-card__actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.service-card__actions .btn {
+  flex: 1;
+  min-width: 100px;
+}
+
+@media (max-width: 768px) {
+  .service-card__actions {
+    flex-direction: column;
+  }
+  
+  .service-card__actions .btn {
+    width: 100%;
+  }
+}
+</style>

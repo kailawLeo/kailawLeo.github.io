@@ -2,48 +2,27 @@
 <html lang="zh-TW">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
-    
-    {% seo %}
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200;300;400;500;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" />
-    
-    {% if page.layout == 'post' %}
-        <link rel="stylesheet" href="{{ '/articles/articles.css' | relative_url }}">
-    {% elsif page.layout == 'articles' %}
-        <link rel="stylesheet" href="{{ '/articles/articles.css' | relative_url }}">
-    {% else %}
-        <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
-    {% endif %}
-    
-    {% if page.custom_css %}
-        {% for css_file in page.custom_css %}
-            <link rel="stylesheet" href="{{ css_file | relative_url }}">
-        {% endfor %}
-    {% endif %}
+    {% include head.html %}
 </head>
 
-<body class="{% if page.body_class %}{{ page.body_class }}{% endif %}">
-    {% include header.html %}
+<body class="{% if page.body_class %}{{ page.body_class }}{% endif %}{% if page.layout %} {{ page.layout }}-page{% endif %}">
+    <header class="site-header">
+        {% include header.html %}
+    </header>
     
-    <main>
+    <main class="site-main">
         {{ content }}
     </main>
     
-    {% include footer.html %}
+    <footer class="site-footer">
+        {% include footer.html %}
+    </footer>
     
-    {% if page.layout == 'post' %}
+    <!-- Scripts -->
+    <script type="module" src="{{ '/assets/js/main.js' | relative_url }}"></script>
+    
+    {% if page.layout == 'post' or page.layout == 'articles' %}
         <script src="{{ '/articles/articles.js' | relative_url }}"></script>
-    {% elsif page.layout == 'articles' %}
-        <script src="{{ '/articles/articles.js' | relative_url }}"></script>
-    {% else %}
-        <script src="{{ '/floating-button.js' | relative_url }}"></script>
     {% endif %}
     
     {% if page.custom_js %}

@@ -1,39 +1,36 @@
-<!-- Header -->
-<header>
-    <div class="container">
-        <div class="header-content">
-            <div class="logo">
-                <a href="{{ '/' | relative_url }}">智凱律師</a>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>首頁</a></li>
-                    <li><a href="{{ '/about/about.html' | relative_url }}" {% if page.url contains '/about/' %}class="active"{% endif %}>關於</a></li>
-                    <li><a href="{{ '/team/team.html' | relative_url }}" {% if page.url contains '/team/' %}class="active"{% endif %}>團隊</a></li>
-                    <li><a href="{{ '/service/service.html' | relative_url }}" {% if page.url contains '/service/' %}class="active"{% endif %}>服務</a></li>
-                    <li><a href="{{ '/articles/' | relative_url }}" {% if page.url contains '/articles/' %}class="active"{% endif %}>文章</a></li>
-                    <li><a href="{{ '/contact/contact.html' | relative_url }}" {% if page.url contains '/contact/' %}class="active"{% endif %}>聯絡</a></li>
-                </ul>
-                <!-- Mobile menu toggle -->
-                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打開選單">
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                </button>
-            </nav>
+<div class="container">
+    <div class="header-content">
+        <div class="logo">
+            <a href="{{ '/' | relative_url }}">智凱律師</a>
         </div>
-    </div>
-    <!-- Mobile menu overlay -->
-    <div class="mobile-menu-overlay" id="mobileMenuOverlay">
-        <nav class="mobile-nav">
+        <nav class="main-nav">
             <ul>
-                <li><a href="{{ '/' | relative_url }}">首頁</a></li>
-                <li><a href="{{ '/about/about.html' | relative_url }}">關於</a></li>
-                <li><a href="{{ '/team/team.html' | relative_url }}">團隊</a></li>
-                <li><a href="{{ '/service/service.html' | relative_url }}">服務</a></li>
-                <li><a href="{{ '/articles/' | relative_url }}">文章</a></li>
-                <li><a href="{{ '/contact/contact.html' | relative_url }}">聯絡</a></li>
+                <li><a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>首頁</a></li>
+                <li><a href="{{ '/about/about.html' | relative_url }}" {% if page.url contains '/about/' %}class="active"{% endif %}>關於</a></li>
+                <li><a href="{{ '/team.html' | relative_url }}" {% if page.url contains '/team' %}class="active"{% endif %}>團隊</a></li>
+                <li><a href="{{ '/service.html' | relative_url }}" {% if page.url contains '/service' %}class="active"{% endif %}>服務</a></li>
+                <li><a href="{{ '/articles/' | relative_url }}" {% if page.url contains '/articles/' %}class="active"{% endif %}>文章</a></li>
+                <li><a href="{{ '/contact.html' | relative_url }}" {% if page.url contains '/contact' %}class="active"{% endif %}>聯絡</a></li>
             </ul>
         </nav>
+        <!-- Mobile menu toggle -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打開選單">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
     </div>
-</header>
+</div>
+<!-- Mobile menu overlay -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <nav class="mobile-nav">
+        <ul>
+            <li><a href="{{ '/' | relative_url }}">首頁</a></li>
+            <li><a href="{{ '/about/about.html' | relative_url }}">關於</a></li>
+            <li><a href="{{ '/team.html' | relative_url }}">團隊</a></li>
+            <li><a href="{{ '/service.html' | relative_url }}">服務</a></li>
+            <li><a href="{{ '/articles/' | relative_url }}">文章</a></li>
+            <li><a href="{{ '/contact.html' | relative_url }}">聯絡</a></li>
+        </ul>
+    </nav>
+</div>

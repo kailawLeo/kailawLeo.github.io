@@ -1,40 +1,12 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>關於我們 - 智凱律師事務所</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200;300;400;500;600;700;900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="about.css">
-    <link rel="stylesheet" type="text/css"
-        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
-    <link rel="stylesheet" type="text/css"
-        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" />
-</head>
-
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">智凱律師</div>
-                <nav>
-                    <ul>
-                        <li><a href="../index.html">首頁</a></li>
-                        <li><a href="about.html" class="active">關於</a></li>
-                        <li><a href="../team/team.html">團隊</a></li>
-                        <li><a href="../service/service.html">服務</a></li>
-                        <li><a href="../articles/">文章</a></li>
-                        <li><a href="../contact/contact.html">聯絡</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
+---
+layout: default
+title: 關於我們 - 智凱律師事務所
+description: 青年律師張智凱的學經歷、專業領域及服務理念介紹
+keywords: 張智凱律師, 律師簡介, 學歷, 專業經驗, 律師事務所
+body_class: about-page
+custom_js:
+  - /about/about.js
+---
 
     <!-- Hero Section -->
     <section class="hero">
@@ -260,22 +232,13 @@
                 <h2>需要法律協助嗎？</h2>
                 <p>讓我們為您提供專業的法律諮詢服務</p>
                 <div class="cta-buttons">
-                    <a href="../contact/contact.html" class="cta-button primary">立即諮詢</a>
-                    <a href="tel:0928093279" class="cta-button secondary">
+                    <a href="{{ '/contact.html' | relative_url }}" class="cta-button primary">立即諮詢</a>
+                    <a href="tel:{{ site.author.phone }}" class="cta-button secondary">
                         <i class="ph ph-phone"></i>
-                        0928-093-279
+                        {{ site.author.phone }}
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 智凱律師事務所. 版權所有 | 專業、誠信、服務</p>
-    </footer>
-
-    <script src="about.js"></script>
-</body>
-
-</html>

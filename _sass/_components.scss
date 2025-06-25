@@ -1,0 +1,390 @@
+// ======================================
+// 組件樣式
+// ======================================
+
+// Section Title 組件
+.section-title {
+  @include section-title;
+}
+
+// 按鈕組件
+.btn {
+  @include btn-base;
+  
+  &--primary {
+    @include btn-primary;
+  }
+  
+  &--secondary {
+    @include btn-secondary;
+  }
+  
+  &--small {
+    padding: var(--btn-padding-sm);
+    font-size: var(--font-size-sm);
+  }
+  
+  &--large {
+    padding: var(--btn-padding-lg);
+    font-size: var(--font-size-lg);
+  }
+  
+  &--block {
+    width: 100%;
+  }
+}
+
+// 卡片組件
+.card {
+  @include card;
+  padding: var(--spacing-lg);
+  
+  &__header {
+    margin-bottom: var(--spacing-md);
+  }
+  
+  &__body {
+    flex: 1;
+  }
+  
+  &__footer {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  &--featured {
+    border: 2px solid var(--primary-color);
+    background: rgba(215, 183, 101, 0.05);
+    
+    &:hover {
+      border-color: var(--primary-hover);
+      box-shadow: 0 20px 40px var(--primary-shadow);
+    }
+  }
+}
+
+// 表單組件
+.form {
+  &__group {
+    margin-bottom: var(--spacing-md);
+  }
+  
+  &__label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-light);
+    font-weight: var(--font-weight-medium);
+  }
+  
+  &__input {
+    @include input-base;
+  }
+  
+  &__textarea {
+    @include input-base;
+    height: auto;
+    min-height: 120px;
+    resize: vertical;
+  }
+  
+  &__select {
+    @include input-base;
+    cursor: pointer;
+  }
+  
+  &__error {
+    color: #ef4444;
+    font-size: var(--font-size-sm);
+    margin-top: var(--spacing-xs);
+  }
+  
+  &__help {
+    color: var(--text-muted);
+    font-size: var(--font-size-sm);
+    margin-top: var(--spacing-xs);
+  }
+}
+
+// Badge 組件
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  
+  &--primary {
+    background: var(--primary-color);
+    color: var(--bg-dark);
+  }
+  
+  &--secondary {
+    background: rgba(215, 183, 101, 0.2);
+    color: var(--primary-light);
+  }
+  
+  &--outline {
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+  }
+}
+
+// Tag 組件
+.tag {
+  @extend .badge;
+  
+  &__remove {
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: var(--spacing-xs);
+    
+    &:hover {
+      color: #ef4444;
+    }
+  }
+}
+
+// Avatar 組件
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--border-radius-round);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  @include flex-center;
+  color: var(--bg-dark);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-lg);
+  flex-shrink: 0;
+  
+  &--large {
+    width: 80px;
+    height: 80px;
+    font-size: var(--font-size-3xl);
+  }
+  
+  &--small {
+    width: 32px;
+    height: 32px;
+    font-size: var(--font-size-sm);
+  }
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+  }
+}
+
+// Loading 組件
+.loading {
+  @include flex-center;
+  padding: var(--spacing-xl);
+  color: var(--text-muted);
+  
+  &__spinner {
+    @include loading-spinner;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  &__text {
+    font-size: var(--font-size-sm);
+  }
+}
+
+// Empty State 組件
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-xxl) var(--spacing-lg);
+  color: var(--text-muted);
+  
+  &__icon {
+    font-size: 4rem;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-sm);
+    display: block;
+  }
+  
+  &__title {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-sm);
+    color: var(--white);
+  }
+  
+  &__description {
+    margin-bottom: var(--spacing-lg);
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+// Progress Bar 組件
+.progress {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  
+  &__fill {
+    height: 100%;
+    background: var(--primary-color);
+    transition: width 0.1s ease;
+    width: 0%;
+  }
+}
+
+// Notification 組件
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--primary-color);
+  color: var(--bg-dark);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius);
+  font-weight: var(--font-weight-semibold);
+  z-index: var(--z-tooltip);
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  box-shadow: 0 10px 30px var(--shadow-medium);
+  
+  &--show {
+    transform: translateX(0);
+  }
+  
+  &--error {
+    background: #ef4444;
+    color: var(--white);
+  }
+  
+  &--success {
+    background: #10b981;
+    color: var(--white);
+  }
+  
+  &--warning {
+    background: #f59e0b;
+    color: var(--bg-dark);
+  }
+}
+
+// Breadcrumb 組件
+.breadcrumb {
+  @include flex-center;
+  justify-content: flex-start;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-lg);
+  font-size: var(--font-size-sm);
+  flex-wrap: wrap;
+  
+  &__item {
+    color: var(--primary-color);
+    transition: var(--transition);
+    
+    &:hover {
+      color: var(--primary-hover);
+    }
+    
+    &--current {
+      color: var(--text-muted);
+      cursor: default;
+      
+      &:hover {
+        color: var(--text-muted);
+      }
+    }
+  }
+  
+  &__separator {
+    color: var(--text-muted);
+  }
+}
+
+// Stats 組件
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-lg);
+  
+  &__item {
+    text-align: center;
+    padding: var(--spacing-lg);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius);
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+  
+  &__number {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-heavy);
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  &__label {
+    color: var(--text-muted);
+    font-size: var(--font-size-sm);
+  }
+}
+
+// Timeline 組件
+.timeline {
+  position: relative;
+  padding-left: var(--spacing-lg);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--primary-color);
+  }
+  
+  &__item {
+    position: relative;
+    margin-bottom: var(--spacing-xl);
+    padding-left: var(--spacing-xl);
+    
+    &::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 0;
+      width: 15px;
+      height: 15px;
+      background: var(--primary-color);
+      border-radius: var(--border-radius-round);
+      border: 3px solid var(--bg-dark);
+    }
+  }
+  
+  &__content {
+    background: rgba(255, 255, 255, 0.05);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  &__date {
+    display: inline-block;
+    background: var(--primary-color);
+    color: var(--bg-dark);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-sm);
+  }
+}

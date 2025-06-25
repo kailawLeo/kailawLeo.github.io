@@ -1,0 +1,302 @@
+<!-- CTA 區塊組件 -->
+{% assign cta = include.cta %}
+
+<section class="cta-section {% if cta.theme %}cta-section--{{ cta.theme }}{% else %}cta-section--primary{% endif %}">
+  <div class="container">
+    <div class="cta-content">
+      {% if cta.subtitle %}
+        <p class="cta-subtitle">{{ cta.subtitle }}</p>
+      {% endif %}
+      
+      <h2 class="cta-title">{{ cta.title | default: "需要專業法律協助？" }}</h2>
+      
+      {% if cta.description %}
+        <p class="cta-description">{{ cta.description }}</p>
+      {% endif %}
+      
+      <div class="cta-buttons">
+        {% if cta.primary_button %}
+          <a href="{{ cta.primary_button.url | default: '/contact.html' }}" class="cta-button cta-button--primary">
+            {% if cta.primary_button.icon %}
+              <i class="{{ cta.primary_button.icon }}"></i>
+            {% endif %}
+            {{ cta.primary_button.text | default: "立即諮詢" }}
+          </a>
+        {% else %}
+          <a href="{{ '/contact.html' | relative_url }}" class="cta-button cta-button--primary">
+            <i class="ph ph-chat-circle"></i>
+            立即諮詢
+          </a>
+        {% endif %}
+        
+        {% if cta.secondary_button %}
+          <a href="{{ cta.secondary_button.url | default: 'tel:' | append: site.author.phone }}" class="cta-button cta-button--secondary">
+            {% if cta.secondary_button.icon %}
+              <i class="{{ cta.secondary_button.icon }}"></i>
+            {% else %}
+              <i class="ph ph-phone"></i>
+            {% endif %}
+            {{ cta.secondary_button.text | default: site.author.phone }}
+          </a>
+        {% else %}
+          <a href="tel:{{ site.author.phone }}" class="cta-button cta-button--secondary">
+            <i class="ph ph-phone"></i>
+            {{ site.author.phone }}
+          </a>
+        {% endif %}
+        
+        {% if cta.additional_buttons %}
+          {% for button in cta.additional_buttons %}
+            <a href="{{ button.url }}" class="cta-button cta-button--outline"{% if button.external %} target="_blank" rel="noopener"{% endif %}>
+              {% if button.icon %}
+                <i class="{{ button.icon }}"></i>
+              {% endif %}
+              {{ button.text }}
+            </a>
+          {% endfor %}
+        {% endif %}
+      </div>
+      
+      {% if cta.features %}
+        <div class="cta-features">
+          {% for feature in cta.features %}
+            <div class="cta-feature">
+              {% if feature.icon %}
+                <i class="{{ feature.icon }}"></i>
+              {% endif %}
+              <span>{{ feature.text }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+      
+      {% if cta.trust_indicators %}
+        <div class="cta-trust">
+          {% for indicator in cta.trust_indicators %}
+            <div class="trust-item">
+              {% if indicator.icon %}
+                <i class="{{ indicator.icon }}"></i>
+              {% endif %}
+              <span>{{ indicator.text }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+.cta-section {
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  
+  &--primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: var(--bg-dark);
+  }
+  
+  &--dark {
+    background: var(--bg-darker);
+    color: var(--text-light);
+  }
+  
+  &--gradient {
+    background: linear-gradient(135deg, var(--bg-darker) 0%, var(--primary-color) 100%);
+    color: var(--white);
+  }
+}
+
+.cta-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cta-subtitle {
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+.cta-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  letter-spacing: 1px;
+}
+
+.cta-description {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: var(--transition);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  
+  &--primary {
+    background: var(--bg-dark);
+    color: var(--white);
+    
+    .cta-section--dark & {
+      background: var(--primary-color);
+      color: var(--bg-dark);
+    }
+    
+    &:hover {
+      background: var(--bg-darker);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      
+      .cta-section--dark &:hover {
+        background: var(--primary-hover);
+      }
+    }
+  }
+  
+  &--secondary {
+    background: rgba(255, 255, 255, 0.2);
+    color: inherit;
+    border: 2px solid currentColor;
+    
+    &:hover {
+      background: var(--bg-dark);
+      color: var(--white);
+      transform: translateY(-2px);
+      
+      .cta-section--dark &:hover {
+        background: var(--white);
+        color: var(--bg-dark);
+      }
+    }
+  }
+  
+  &--outline {
+    background: transparent;
+    color: inherit;
+    border: 2px solid currentColor;
+    
+    &:hover {
+      background: currentColor;
+      color: var(--bg-dark);
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.cta-features {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.cta-feature {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  
+  i {
+    color: var(--primary-color);
+    
+    .cta-section--primary & {
+      color: var(--bg-dark);
+    }
+  }
+}
+
+.cta-trust {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  
+  i {
+    color: var(--primary-color);
+    
+    .cta-section--primary & {
+      color: var(--bg-dark);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .cta-section {
+    padding: 3rem 0;
+  }
+  
+  .cta-title {
+    font-size: 2rem;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cta-button {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+  
+  .cta-features,
+  .cta-trust {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta-title {
+    font-size: 1.8rem;
+  }
+  
+  .cta-description {
+    font-size: 1rem;
+  }
+  
+  .cta-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+</style>

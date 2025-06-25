@@ -1,0 +1,322 @@
+---
+# Front matter required for Jekyll to process
+---
+
+// ======================================
+// 主要樣式檔案
+// ======================================
+
+// 導入變數和混合器
+@import "variables";
+@import "mixins";
+
+// 導入基礎樣式
+@import "base";
+
+// 導入組件樣式
+@import "components";
+
+// 導入佈局樣式
+@import "layout";
+
+// ======================================
+// 頁面特定樣式
+// ======================================
+
+// 首頁特定樣式
+.home-page {
+  .hero {
+    background: url("/assets/images/hero-bg.png") no-repeat center center;
+    background-size: cover;
+    color: var(--white);
+    padding: 4rem 0;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    
+    .container {
+      max-width: none;
+      margin: 0;
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+    }
+    
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+      padding-left: 5rem;
+      padding-right: 2rem;
+      
+      h1 {
+        font-size: var(--font-size-5xl);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        font-weight: var(--font-weight-heavy);
+        letter-spacing: 2px;
+      }
+      
+      h2 {
+        font-size: var(--font-size-xl);
+        margin-bottom: var(--spacing-xl);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        font-weight: var(--font-weight-normal);
+        letter-spacing: 2px;
+      }
+      
+      p {
+        font-size: var(--font-size-base);
+        color: var(--primary-color);
+        margin-bottom: var(--spacing-xl);
+        font-weight: var(--font-weight-light);
+        line-height: 2;
+        letter-spacing: 2px;
+      }
+    }
+    
+    @include respond-to(md) {
+      flex-direction: column;
+      justify-content: center;
+      padding: 2rem 0;
+      
+      .hero-content {
+        align-items: center;
+        text-align: center;
+        padding: 0 var(--spacing-lg);
+        
+        h1 {
+          font-size: var(--font-size-4xl);
+        }
+        
+        h2 {
+          font-size: var(--font-size-lg);
+          margin-bottom: var(--spacing-lg);
+        }
+      }
+    }
+  }
+  
+  // WhyMe Section
+  .whyMe {
+    padding: var(--spacing-xxl) 0;
+    
+    .whyMe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-xl);
+      align-items: stretch;
+    }
+    
+    .whyMe-card {
+      text-align: center;
+      transition: var(--transition);
+      
+      &:hover {
+        transform: translateY(-5px);
+        
+        i.ph {
+          color: var(--primary-light);
+          filter: drop-shadow(0 0 8px rgba(242, 212, 136, 0.511))
+            drop-shadow(0 0 24px rgba(237, 187, 62, 0.21));
+        }
+      }
+      
+      h3 {
+        font-size: var(--font-size-xl);
+        margin-bottom: var(--spacing-sm);
+        margin-top: 0.3rem;
+        font-weight: var(--font-weight-semibold);
+        letter-spacing: 0.5px;
+      }
+      
+      p {
+        color: var(--text-muted);
+        font-weight: var(--font-weight-light);
+        line-height: var(--line-height-normal);
+      }
+      
+      i.ph {
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 65px;
+        margin: var(--spacing-xl) auto 0;
+        padding: 15px;
+        transition: var(--transition);
+      }
+    }
+    
+    .whyMe-button {
+      @include btn-primary;
+      display: block;
+      width: fit-content;
+      margin: 5rem auto 0;
+      font-size: var(--font-size-xl);
+      letter-spacing: 1px;
+    }
+  }
+  
+  // Experience Section
+  .experience {
+    padding: var(--spacing-xxl) 0;
+    background: var(--bg-darker);
+    
+    .experience-timeline {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-xl);
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .timeline-item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      text-align: left;
+      padding: var(--spacing-md);
+      background: var(--bg-dark);
+      border-radius: var(--border-radius-large);
+      
+      .timeline-number {
+        color: rgba(255, 255, 255, 0.5);
+        font-family: "Matangi", cursive;
+        padding-right: var(--spacing-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: var(--font-weight-light);
+        font-size: 5rem;
+        flex-shrink: 0;
+      }
+      
+      .timeline-content {
+        h3 {
+          color: #cccccc;
+          margin-bottom: var(--spacing-sm);
+          font-weight: var(--font-weight-semibold);
+          letter-spacing: 0.5px;
+          font-size: var(--font-size-xl);
+        }
+        
+        p {
+          font-weight: var(--font-weight-light);
+          line-height: var(--line-height-normal);
+          color: var(--text-dark);
+        }
+      }
+    }
+  }
+  
+  // Contact Section
+  .contact {
+    padding: var(--spacing-xxl) 0;
+    
+    .contact-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-xl);
+      margin-top: var(--spacing-xl);
+    }
+    
+    .contact-info {
+      h3 {
+        margin-bottom: var(--spacing-sm);
+        font-weight: var(--font-weight-semibold);
+        letter-spacing: 0.5px;
+      }
+      
+      p {
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        font-weight: var(--font-weight-light);
+        line-height: var(--line-height-normal);
+        
+        i {
+          margin-right: 0.5rem;
+          width: 20px;
+        }
+      }
+    }
+    
+    .contact-form {
+      background: rgba(255, 255, 255, 0.1);
+      padding: var(--spacing-lg);
+      border-radius: var(--border-radius);
+      
+      h3 {
+        font-weight: var(--font-weight-semibold);
+        letter-spacing: 0.5px;
+        margin-bottom: var(--spacing-md);
+      }
+      
+      .submit-btn {
+        background: #e74c3c;
+        color: var(--white);
+        padding: 0.8rem var(--spacing-lg);
+        border: none;
+        border-radius: var(--border-radius-small);
+        cursor: pointer;
+        font-weight: var(--font-weight-semibold);
+        transition: var(--transition);
+        font-family: inherit;
+        letter-spacing: 1px;
+        
+        &:hover {
+          background: #c0392b;
+        }
+      }
+    }
+  }
+}
+
+// CTA Button 樣式
+.cta-button {
+  @include btn-primary;
+  box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+  letter-spacing: 1px;
+  
+  &:hover {
+    box-shadow: 0 6px 20px rgba(255, 241, 191, 0.4);
+  }
+}
+
+// 響應式調整
+@include respond-to(md) {
+  .home-page {
+    .whyMe-grid,
+    .experience-timeline,
+    .contact-content {
+      grid-template-columns: 1fr;
+    }
+    
+    .timeline-item {
+      flex-direction: column;
+      text-align: center;
+      
+      .timeline-number {
+        margin-right: 0;
+        margin-bottom: var(--spacing-sm);
+        padding-right: 0;
+      }
+    }
+  }
+}
+
+@include respond-to(sm) {
+  .home-page {
+    .cta-button {
+      display: block;
+      width: 100%;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+  }
+}

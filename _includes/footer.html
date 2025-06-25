@@ -1,54 +1,51 @@
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>智凱律師事務所</h3>
-                <p>專業、誠信、效率</p>
-                <div class="footer-contact">
-                    <p><i class="ph ph-phone"></i> {{ site.author.phone }}</p>
-                    <p><i class="ph ph-envelope"></i> {{ site.author.email }}</p>
-                    <p><i class="ph ph-map-pin"></i> {{ site.author.address }}</p>
-                </div>
-            </div>
-            
-            <div class="footer-section">
-                <h3>服務項目</h3>
-                <ul class="footer-links">
-                    <li><a href="{{ '/service/service.html' | relative_url }}">企業法務</a></li>
-                    <li><a href="{{ '/service/service.html' | relative_url }}">民商事訴訟</a></li>
-                    <li><a href="{{ '/service/service.html' | relative_url }}">不動產法務</a></li>
-                    <li><a href="{{ '/service/service.html' | relative_url }}">家事法務</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h3>最新文章</h3>
-                <ul class="footer-articles">
-                    {% for post in site.posts limit:3 %}
-                    <li>
-                        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-                        <span class="article-date">{{ post.date | date: "%Y-%m-%d" }}</span>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h3>聯絡我們</h3>
-                <p>需要法律協助嗎？立即聯繫我們</p>
-                <div class="footer-cta">
-                    <a href="{{ '/contact/contact.html' | relative_url }}" class="footer-btn">立即諮詢</a>
-                </div>
-                <div class="footer-social">
-                    <a href="tel:{{ site.author.phone }}" aria-label="撥打電話"><i class="ph ph-phone-call"></i></a>
-                    <a href="mailto:{{ site.author.email }}" aria-label="發送郵件"><i class="ph ph-envelope-simple"></i></a>
-                </div>
+<div class="container">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>智凱律師事務所</h3>
+            <p>專業、誠信、效率</p>
+            <div class="footer-contact">
+                <p><i class="ph ph-phone"></i> {{ site.author.phone }}</p>
+                <p><i class="ph ph-envelope"></i> {{ site.author.email }}</p>
+                <p><i class="ph ph-map-pin"></i> {{ site.author.address }}</p>
             </div>
         </div>
         
-        <div class="footer-bottom">
-            <p>&copy; {{ 'now' | date: "%Y" }} {{ site.title }}. 版權所有 | 專業、誠信、服務</p>
+        <div class="footer-section">
+            <h3>服務項目</h3>
+            <ul class="footer-links">
+                <li><a href="{{ '/service.html' | relative_url }}">企業法務</a></li>
+                <li><a href="{{ '/service.html' | relative_url }}">民商事訴訟</a></li>
+                <li><a href="{{ '/service.html' | relative_url }}">不動產法務</a></li>
+                <li><a href="{{ '/service.html' | relative_url }}">家事法務</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-section">
+            <h3>最新文章</h3>
+            <ul class="footer-articles">
+                {% for post in site.posts limit:3 %}
+                <li>
+                    <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                    <span class="article-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="footer-section">
+            <h3>聯絡我們</h3>
+            <p>需要法律協助嗎？立即聯繫我們</p>
+            <div class="footer-cta">
+                <a href="{{ '/contact.html' | relative_url }}" class="footer-btn">立即諮詢</a>
+            </div>
+            <div class="footer-social">
+                <a href="tel:{{ site.author.phone }}" aria-label="撥打電話"><i class="ph ph-phone-call"></i></a>
+                <a href="mailto:{{ site.author.email }}" aria-label="發送郵件"><i class="ph ph-envelope-simple"></i></a>
+            </div>
         </div>
     </div>
-</footer>
+    
+    <div class="footer-bottom">
+        <p>&copy; {{ 'now' | date: "%Y" }} {{ site.title }}. 版權所有 | 專業、誠信、服務</p>
+    </div>
+</div>
